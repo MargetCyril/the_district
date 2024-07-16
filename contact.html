@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
@@ -17,7 +17,8 @@
             <nav class="navbar navbar-expand-sm">
                 <img src="images_the_district/the_district_brand/logo_transparent.png" title="logo transparent"
                     class="navbar-brand">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapsibleNavbar">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="collapsibleNavbar">
@@ -37,19 +38,65 @@
                     </ul>
                 </div>
             </nav>
-            
+
             <div class="basilic">
-                <div class="search">
+                <!-- <div class="search">
                     <form method="post" action="">
                         <label for="recherche"></label>
                         <input type="text" name="recherche" id="recherche" placeholder="recherche..."></input>
                     </form>
-                </div>
+                </div> -->
+                <div class="page">
+                    Contact
+                    </div>
             </div>
         </header>
-<div class="corps">
-Contact
+        <div class="corps">
+
+<div class="form-group">
+            <form method="post" action="" onsubmit="return checkform(this)" id="formulaire_contact" class="row g-3">
+
+                <h1>Contact</h1>
+
+                <div classs="col-12">
+                    <label for="nom">Nom et prénom:</label>
+                    <input type="text" name="nom" id="nom" class="form-control" required>
+                    <span class="form-text" style="color:red">ce champ est obligatoire</span>
+                    <p id="erreur_nom" class="red"></p>
+                </div>
+                <div class="col-md-6">
+                    <label for="telephone">Téléphone:</label>
+                    <input type="text" name="telephone" id="telephone" class="form-control">
+                    <span class="form-text" style="color:red">ce
+                        champ est obligatoire</span>
+                    <p id="erreur_telephone" class="red"></p>
+                </div>
+                <div class="col-md-6">
+                    <label for="email">Email</label><input type="email" name="email" id="email" class="form-control" required ><span
+                        class="form-text" style="color:red">ce champ est obligatoire</span>
+                    <p id="erreur_mail" class="red"></p>
+                </div>
+                <div class="col-12">
+                    <label for="adresse">Adresse:</label><input type="text" name="adresse" id="adresse" class="form-control"><span
+                        class="form-text" style="color:red">ce champ est
+                        obligatoire</span>
+                    <p id="erreur_adresse" class="red"></p>
+                </div>
+                <div class="col-12">
+                    <label for="question">Votre question</label> <textarea name="question" id="question"
+                        value="" class="form-control"></textarea>
+                        <span class="form-text" style="color:red">ce champ est
+                        obligatoire</span>
+                </div>
+
+                <div class="col-12">
+                    <button type="submit" class="btn btn-dark">Envoyer</button>
+                    <button type="reset" class="btn btn-dark">Annuler</button>
+                </div>
+            </form>
 </div>
+
+        </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

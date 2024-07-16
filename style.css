@@ -45,6 +45,7 @@
         width: 80vw;
         object-fit:cover;
         margin:auto;
+        transition: transform .2s;
     }
     
     .page {
@@ -79,7 +80,18 @@
     }
     .autoscroll {overflow:auto;}
 
-    @media (min-width: 992px) {
+.cache {
+    display:none;
+}
+a:hover + .cache{
+    display:block;
+}
+.img-link:hover {
+    width: 90vw;
+    height: 30vh;
+}
+
+ @media (min-width: 992px) {
         .navbar-brand {
             height: 8rem;
             width: 14rem;
@@ -88,5 +100,13 @@
     }
     .basilic {
         height: 15rem
+    }
+    .img-link {
+        height: 20vh;
+        width: 35vw;
+    }
+    .img-link:hover {
+        height:30vh;
+        width:45vw;
     }
 }
