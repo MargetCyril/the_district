@@ -3,7 +3,7 @@
         width: 7rem;
         object-fit: cover;
         margin-right: 8rem;
-        
+
     }
 
 
@@ -18,7 +18,7 @@
     }
 
     .bg-color {
-       background-color: #970747;
+        background-color: #970747;
     }
 
     .search {
@@ -26,40 +26,41 @@
     }
 
     .header {
-        
+
         color: white;
-        margin-right:8rem;
+        margin-right: 8rem;
         float: space-between;
     }
-    
+
     .corps {
         background-color: #EBD5B3;
         height: 100%;
     }
 
-.presentation {
-    text-align: center;
-}
+    .presentation {
+        text-align: center;
+    }
+ 
     .img-link {
         height: 20vh;
         width: 80vw;
-        object-fit:cover;
-        margin:auto;
+        object-fit: cover;
+        margin: auto;
         transition: transform .2s;
     }
-    
+
     .page {
-        margin:auto;
-        color:#970747;
+        margin: auto;
+        color: #970747;
         font-size: 2.5rem;
     }
 
-    .plats{
-        height:20vh;
-        width:80vw;
+    .plats {
+        height: 20vh;
+        width: 80vw;
         background-color: beige;
-        color:black;
-        margin:auto;
+        color: black;
+        margin: auto;
         display: flex;
     }
 
@@ -70,43 +71,54 @@
     }
 
     .legende {
-        padding-left:1vw;
-        padding-top:1vw;
-        float:left;
+        padding-left: 1vw;
+        padding-top: 1vw;
+        float: left;
     }
 
     a:link {
-        text-decoration:none;
+        text-decoration: none;
     }
-    .autoscroll {overflow:auto;}
 
-.cache {
-    display:none;
-}
-a:hover + .cache{
-    display:block;
-}
-.img-link:hover {
-    width: 90vw;
-    height: 30vh;
-}
+    .autoscroll {
+        overflow: auto;
+    }
 
- @media (min-width: 992px) {
+    .cache {
+        display: none;
+    }
+
+    a:hover+.cache {
+        display: block;
+    }
+
+    .img-link:hover {
+        width: 90vw;
+        height: 30vh;
+    }
+
+    @media (min-width: 992px) {
         .navbar-brand {
             height: 8rem;
             width: 14rem;
         }
-    .header {  font-size: 3rem;
+
+        .header {
+            font-size: 3rem;
+        }
+
+        .basilic {
+            height: 15rem
+        }
+
+        .img-link {
+            height: 20vh;
+            width: 35vw;
+        }
+
+        .img-link:hover {
+            height: 30vh;
+            width: 45vw;
+        }
+
     }
-    .basilic {
-        height: 15rem
-    }
-    .img-link {
-        height: 20vh;
-        width: 35vw;
-    }
-    .img-link:hover {
-        height:30vh;
-        width:45vw;
-    }
-}
