@@ -11,50 +11,15 @@
 
 <body>
     <div class="container-fluid">
-        <header class="bg-color">
-
-
-            <nav class="navbar navbar-expand-sm">
-                <img src="images_the_district/the_district_brand/logo_transparent.png" title="logo transparent"
-                    class="navbar-brand">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#collapsibleNavbar">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="collapsibleNavbar">
-                    <ul class="navbar-nav ">
-                        <li class="nav-item">
-                            <a href="index.html" title="Acceuil" class="nav-link header">Acceuil</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="categorie.html" title="Catégorie" class="nav-link header">Catégorie</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="plats.html" title="Plats" class="nav-link header">Plats</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="contact.html" title="Contact" class="nav-link header">Contact</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-
-            <div class="basilic">
-                <!-- <div class="search">
-                    <form method="post" action="">
-                        <label for="recherche"></label>
-                        <input type="text" name="recherche" id="recherche" placeholder="recherche..."></input>
-                    </form>
-                </div> -->
-                <div class="page">
-                    Contact
-                    </div>
-            </div>
-        </header>
+        <?php
+        $titre = "Contact";
+        include("header.php");
+        ?>
+        
         <div class="corps">
 
 <div class="form-group mx-5">
-            <form method="POST" action="" onsubmit="return checkform1(this)" id="formulaire_contact" class="row g-3">
+            <form method="POST" action="form_contact.php" onsubmit="return checkform1(this)" id="formulaire_contact" class="row g-3">
 
                 <h1>Contact</h1>
 
@@ -66,7 +31,7 @@
                 </div>
                 <div class="col-md-6">
                     <label for="telephone">Téléphone:</label>
-                    <input type="text" name="telephone" id="telephone" class="form-control">
+                    <input type="text" name="telephone" id="telephone" class="form-control" required>
                     <span class="form-text" style="color:red">ce
                         champ est obligatoire</span>
                     <p id="erreur_telephone" class="red"></p>
@@ -77,7 +42,7 @@
                     <p id="erreur_mail" class="red"></p>
                 </div>
                 <div class="col-12">
-                    <label for="adresse">Adresse:</label><input type="text" name="adresse" id="adresse" class="form-control"><span
+                    <label for="adresse">Adresse:</label><input type="text" name="adresse" id="adresse" class="form-control" required><span
                         class="form-text" style="color:red">ce champ est
                         obligatoire</span>
                     <p id="erreur_adresse" class="red"></p>

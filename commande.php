@@ -11,46 +11,11 @@
 
 <body>
     <div class="container-fluid">
-        <header class="bg-color">
+    <?php
+        $titre = "Commande";
+        include("header.php");
+        ?>
 
-
-            <nav class="navbar navbar-expand-sm">
-                <img src="images_the_district/the_district_brand/logo_transparent.png" title="logo transparent"
-                    class="navbar-brand">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#collapsibleNavbar">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="collapsibleNavbar">
-                    <ul class="navbar-nav ">
-                        <li class="nav-item">
-                            <a href="index.html" title="Acceuil" class="nav-link header">Acceuil</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="categorie.html" title="Catégorie" class="nav-link header">Catégorie</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="plats.html" title="Plats" class="nav-link header">Plats</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="contact.html" title="Contact" class="nav-link header">Contact</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-
-            <div class="basilic">
-                <!-- <div class="search">
-                    <form method="post" action="">
-                        <label for="recherche"></label>
-                        <input type="text" name="recherche" id="recherche" placeholder="recherche..."></input>
-                    </form>
-                </div> -->
-                <div class="page">
-                    Commande
-                </div>
-            </div>
-        </header>
         <div class="corps">
             <h1 class="ms-5">Votre commande:</h1>
             <div class="plats">
@@ -62,7 +27,7 @@
             </div>
 <br>
             <div class="form-group mx-5">
-                <form method="post" action="" onsubmit="return checkform(this)" id="formulaire_contact" class="row g-3">
+                <form method="post" action="" onsubmit="return checkform2(this)" id="formulaire_contact" class="row g-3">
 
 
 

@@ -11,44 +11,10 @@
 
 <body>
     <div class="container-fluid">
-        <!-- début du header à passer en php -->
-        <header class="bg-color">
-
-            <nav class="navbar navbar-expand-sm">
-                <img src="images_the_district/the_district_brand/logo_transparent.png" title="logo transparent"
-                    class="navbar-brand">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#collapsibleNavbar">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="collapsibleNavbar">
-                    <ul class="navbar-nav ">
-                        <li class="nav-item">
-                            <a href="index.html" title="Acceuil" class="nav-link header">Acceuil</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="categorie.html" title="Catégorie" class="nav-link header">Catégorie</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="plats.html" title="Plats" class="nav-link header">Plats</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="contact.html" title="Contact" class="nav-link header">Contact</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-            <!-- fin de la navbar, fin du header? -->
-            <div class="basilic">
-                <div class="search">
-                    <form method="post" action="">
-                        <label for="recherche"></label>
-                        <input type="text" name="recherche" id="recherche" placeholder="recherche...">
-                    </form>
-                </div>
-            </div>
-        </header>
-        <!-- fin du header, sous le basilic-->
+        <?php
+        $titre = "Acceuil";
+        include("header.php");
+        ?>
 
         <div class="corps">
             <div class="presentation">
@@ -58,28 +24,28 @@
                         <div class="row g-3">
 
                             <div class="col-md-6">
-                                <a href="plats_par_categorie.html" class="img-link">
+                                <a href="plats_par_categorie.php" class="img-link">
                                     <img src="images_the_district/food/cesar_salad.jpg" class="img-link"
                                         alt="salade cesar"></a>
                                 <div class="cache">salade cesar</div>
                             </div>
 
                             <div class="col-md-6">
-                                <a href="plats_par_categorie.html" class="img-link"><img
+                                <a href="plats_par_categorie.php" class="img-link"><img
                                         src="images_the_district/food/Food-Name-3631.jpg" class="img-link"
                                         alt="salade cesar"></a>
                                 <div class="cache">salade cesar</div>
                             </div>
 
                             <div class="col-md-6">
-                                <a href="plats_par_categorie.html" class="img-link padtest"><img
+                                <a href="plats_par_categorie.php" class="img-link padtest"><img
                                         src="images_the_district/food/buffalo-chicken.webp" class="img-link"
                                         alt="salade cesar"></a>
                                 <div class="cache">salade cesar</div>
                             </div>
 
                             <div class="col-md-6">
-                                <a href="plats_par_categorie.html" class="img-link padtest"><img
+                                <a href="plats_par_categorie.php" class="img-link padtest"><img
                                         src="images_the_district/food/courgettes_farcies.jpg" class="img-link"
                                         alt="salade cesar"></a>
                                 <div class="cache">salade cesar</div>
@@ -93,28 +59,28 @@
                     <div class="row g-3">
 
                         <div class="col-md-6">
-                            <a href="plats.html" class="img-link">
+                            <a href="plats.php" class="img-link">
                                 <img src="images_the_district/food/cesar_salad.jpg" class="img-link"
                                     alt="salade cesar"></a>
                             <div class="cache"><br>salade cesar</div>
 
                         </div>
                         <div class="col-md-6">
-                            <a href="plats.html" class="img-link">
+                            <a href="plats.php" class="img-link">
                                 <img src="images_the_district/food/Food-Name-3631.jpg" class="img-link"
                                     alt="salade cesar"></a>
                             <div class="cache"><br>salade cesar</div>
 
                         </div>
                         <div class="col-md-6">
-                            <a href="plats.html" class="img-link">
+                            <a href="plats.php" class="img-link">
                                 <img src="images_the_district/food/buffalo-chicken.webp" class="img-link"
                                     alt="salade cesar"></a>
                             <div class="cache"><br>salade cesar</div>
 
                         </div>
                         <div class="col-md-6">
-                            <a href="plats.html" class="img-link">
+                            <a href="plats.php" class="img-link">
                                 <img src="images_the_district/food/courgettes_farcies.jpg" class="img-link"
                                     alt="salade cesar"></a>
                             <div class="cache"><br>salade cesar</div>
@@ -123,8 +89,10 @@
                     </div>
                 </div>
             </div>
+        <br><br>
         </div>
     </div>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
