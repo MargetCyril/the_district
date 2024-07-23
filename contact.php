@@ -26,31 +26,31 @@
                 <div class="col-12">
                     <label for="nom">Nom et prénom:</label>
                     <input type="text" name="nom" id="nom" class="form-control" required>
-                    <span class="form-text" style="color:red">ce champ est obligatoire</span>
+                    <span class="form-text" style="color:red">Ce champs est obligatoire</span>
                     <p id="erreur_nom" class="red"></p>
                 </div>
                 <div class="col-md-6">
                     <label for="telephone">Téléphone:</label>
                     <input type="text" name="telephone" id="telephone" class="form-control" required>
-                    <span class="form-text" style="color:red">ce
-                        champ est obligatoire</span>
+                    <span class="form-text" style="color:red">Ce
+                        champs est obligatoire</span>
                     <p id="erreur_telephone" class="red"></p>
                 </div>
                 <div class="col-md-6">
                     <label for="email">Email</label><input type="email" name="email" id="email" class="form-control" required ><span
-                        class="form-text" style="color:red">ce champ est obligatoire</span>
+                        class="form-text" style="color:red">Ce champs est obligatoire</span>
                     <p id="erreur_mail" class="red"></p>
                 </div>
                 <div class="col-12">
                     <label for="adresse">Adresse:</label><input type="text" name="adresse" id="adresse" class="form-control" required><span
-                        class="form-text" style="color:red">ce champ est
+                        class="form-text" style="color:red">Ce champs est
                         obligatoire</span>
                     <p id="erreur_adresse" class="red"></p>
                 </div>
                 <div class="col-12">
                     <label for="question">Votre question</label> <textarea name="question" id="question"
                         value="" class="form-control"></textarea>
-                        <span class="form-text" style="color:red">ce champ est
+                        <span class="form-text" style="color:red">ce champs est
                         obligatoire</span>
                 </div>
 

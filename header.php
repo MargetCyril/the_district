@@ -2,8 +2,9 @@
 <header class="bg-color">
 
             <nav class="navbar navbar-expand-sm">
+                <a href="login_form.php">
                 <img src="images_the_district/the_district_brand/logo_transparent.png" title="logo transparent"
-                    class="navbar-brand">
+                    class="navbar-brand"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#collapsibleNavbar">
                     <span class="navbar-toggler-icon"></span>
