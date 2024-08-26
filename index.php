@@ -1,3 +1,13 @@
+<?php
+include "db.php";
+$db = connexionBase();
+
+$requete = $db->query("SELECT * FROM categorie");
+$tableau = $requete->fetchAll(PDO::FETCH_OBJ);
+$requete->closeCursor();
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -24,13 +34,16 @@
                     <div class="container-fluid">
                         <div class="row g-3">
 
+                            <?php foreach ($tableau as $categorie): ?>
                             <div class="col-md-6">
                                 <a href="plats_par_categorie.php" class="img-link">
-                                    <img src="images_the_district/food/cesar_salad.jpg" class="img-link"
+                                    <img src="images_the_district/category/<?= $categorie->image ?>" class="img-link"
                                         alt="salade cesar"></a>
-                                <div class="cache">salade cesar</div>
+                                <div class="cache"><?=$categorie->libelle?></div>
                             </div>
 
+                            <?php endforeach; ?>
+<!--
                             <div class="col-md-6">
                                 <a href="plats_par_categorie.php" class="img-link"><img
                                         src="images_the_district/food/Food-Name-3631.jpg" class="img-link"
@@ -49,8 +62,9 @@
                                 <a href="plats_par_categorie.php" class="img-link padtest"><img
                                         src="images_the_district/food/courgettes_farcies.jpg" class="img-link"
                                         alt="salade cesar"></a>
-                                <div class="cache">salade cesar</div>
+                                <div class="cache">salade cesar</div> 
                             </div>
+                            -->
                         </div>
                     </div>
                 </div>

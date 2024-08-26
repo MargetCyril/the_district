@@ -1,8 +1,39 @@
 <?php
 session_start();
 
+include "db.php";
+$db = connexionBase();
 
-?>
+
+function commande(){
+    $requete = $db->query("SELECT libelle, total, date_commande, nom_client, telephone_client, adresse_client FROM commande JOIN plat ON commande:id_plat = plat:id");
+$tableau = $requete->fetchAll(PDO::FETCH_OBJ);
+$requete->closeCursor();
+ ?>
+<table>
+            <thead>
+                <tr>
+                    <th>date</th>
+                    <th>nom client</th>
+                    <th>téléphone client</th>
+                    <th>adresse client</th>
+                    <th>plat</th>
+                    <th>prix</th>
+                </tr>
+            </thead>
+
+            <tbody>;
+<?php foreach ($tableau as $commande): ?>
+<tr>
+                    <td><?=$commande->date_commande?></td>
+                    <td><?=$commande->nom_client?></td>
+                    <td><?=$commande->téléphone_client?></td>
+                    <td><?=$commande->adresse_client?></td>
+                    <td><?=$commande->plat?></td>
+                    <td><?=$commande->total?></td>
+                </tr>
+               <?php endforeach; } ?>
+
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -28,6 +59,7 @@ else {
 }    
 ?>
 
+<button type="button" onclick="commande()">liste des commandes </button>
 
 <br>
 <a href="logout.php">déconnexion</a>
