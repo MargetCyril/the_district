@@ -1,3 +1,28 @@
+<?php
+include "db.php";
+$db = connexionBase();
+
+function test_input($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
+
+$page = (!empty(test_input($_GET['page'])) ? test_input($_GET['page']) : 1);
+$limit = 20;
+$debut = ($page - 1)*$limit;
+$requete = $db->query("SELECT * FROM plat WHERE active = 'Yes' LIMIT $limit OFFSET $debut ");
+$tableau = $requete->fetchAll(PDO::FETCH_OBJ);
+$requete->closeCursor();
+$requete = $db->query("SELECT count(id)FROM plat WHERE active = 'Yes' ");
+$elementtotal = $requete->fetchColumn();
+$pagetotal = ceil($elementtotal / $limit);
+$requete->closeCursor();
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -23,54 +48,27 @@
         <div class="presentation"><br>
                 <div class="d-none d-md-block">
                     <h2> Tout nos plats</h2>
-            <a href="commande.php">
-                <br>
-                <div class="plats">
-                    <img src="images_the_district/food/cesar_salad.jpg" class="img-plat" alt="salade cesar">
-                    <p class="legende autoscroll">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus
-                        tortor,
-                        dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam.
-                    </p>
 
-                </div>
-            </a>
-
-            <br>
-            <a href="commande.php">
+                    <?php foreach ($tableau as $plat): ?>
+            
+                <br><a href="commande.php">
+                    <img src="images_the_district/food/<?=$plat->image?>"  class="img-plat" alt="salade cesar">
                 <div class="plats">
-                    <img src="images_the_district/food/cesar_salad.jpg" class="img-plat" alt="salade cesar">
+                    
+                    
                     <p class="legende autoscroll">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus
-                        tortor,
-                        dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam.
+                        <?= $plat->libelle?>
+                        <br>
+                        <?= $plat->description?>
+                        <br>
+                        <?= $plat->prix?>€
                     </p>
+                   
                 </div>
-            </a>
-
+             </a>
             <br>
-            <a href="commande.php">
-                <div class="plats">
-                    <img src="images_the_district/food/cesar_salad.jpg" class="img-plat" alt="salade cesar">
-                    <p class="legende autoscroll">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus
-                        tortor,
-                        dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam.
-                    </p>
-                </div>
-            </a>
-            <br>
-            <a href="commande.php">
-                <div class="plats">
-                    <img src="images_the_district/food/cesar_salad.jpg" class="img-plat" alt="salade cesar">
-                    <p class="legende autoscroll">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus
-                        tortor,
-                        dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam.
-                    </p>
-                </div>
-            </a>
-            <br>
+            <?php endforeach ?>
+          
         </div>
     </div>
     <?php

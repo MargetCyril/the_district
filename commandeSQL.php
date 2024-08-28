@@ -140,4 +140,31 @@ $requete->closeCursor();
 <br>
 <br>
 
+<?php
 
+$requete = $db->query("SELECT nom_client, SUM(total) AS chiffre_affaire 
+                        FROM commande
+                        WHERE etat != 'Annulée'
+                        GROUP BY nom_client 
+                        ORDER BY chiffre_affaire DESC");
+$tableau = $requete->fetchAll(PDO::FETCH_OBJ);
+$requete->closeCursor();
+ ?>
+ <table>
+            <thead>
+                <tr>
+                    <th>Client</th>
+                    <th>Chiffre d'affaire généré</th>
+                </tr>
+            </thead>
+
+            <tbody>
+<?php foreach ($tableau as $commande): ?>
+<tr>
+                    <td><?=$commande->nom_client?></td>
+                    <td><?=$commande->chiffre_affaire?></td>
+                </tr>
+               <?php endforeach;  ?>
+
+<br>
+<br>

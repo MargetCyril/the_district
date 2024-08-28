@@ -1,3 +1,27 @@
+<?php
+include "db.php";
+$db = connexionBase();
+
+function test_input($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
+
+$page = (!empty(test_input($_GET['page'])) ? test_input($_GET['page']) : 1);
+$limit = 6;
+$debut = ($page - 1)*$limit;
+$requete = $db->query("SELECT * FROM categorie WHERE active = 'Yes' LIMIT $limit OFFSET $debut ");
+$tableau = $requete->fetchAll(PDO::FETCH_OBJ);
+$requete->closeCursor();
+$requete = $db->query("SELECT count(id)FROM categorie WHERE active = 'Yes' ");
+$elementtotal = $requete->fetchColumn();
+$pagetotal = ceil($elementtotal / $limit);
+$requete->closeCursor();
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -24,38 +48,31 @@
                     <div class="container-fluid">
                         <div class="row g-3">
 
+                            <?php foreach ($tableau as $categorie): ?>
                             <div class="col-md-6">
                                 <a href="plats_par_categorie.php" class="img-link">
-                                    <img src="images_the_district/food/cesar_salad.jpg" class="img-link"
-                                        alt="salade cesar"></a>
-                                <div class="cache">salade cesar</div>
+                                    <img src="images_the_district/category/<?= $categorie->image ?>" class="img-link"
+                                        alt="<?=$categorie->libelle?>"></a>
+                                <div class="cache"><?=$categorie->libelle?></div>
                             </div>
-
-                            <div class="col-md-6">
-                                <a href="plats_par_categorie.php" class="img-link"><img
-                                        src="images_the_district/food/Food-Name-3631.jpg" class="img-link"
-                                        alt="salade cesar"></a>
-                                <div class="cache">salade cesar</div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <a href="plats_par_categorie.php" class="img-link padtest"><img
-                                        src="images_the_district/food/buffalo-chicken.webp" class="img-link"
-                                        alt="salade cesar"></a>
-                                <div class="cache">salade cesar</div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <a href="plats_par_categorie.php" class="img-link padtest"><img
-                                        src="images_the_district/food/courgettes_farcies.jpg" class="img-link"
-                                        alt="salade cesar"></a>
-                                <div class="cache">salade cesar</div>
+                            <?php endforeach; ?><br>
+                            
                             </div>
                         </div>
-                    </div>
+<br>
+                        <nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    <li class="page-item  <?php if ($page == 1) {echo 'disabled';} ?> ">
+      <a class="page-link" href="?page=<?php echo $page-1; ?>">page precedente</a>
+    </li>
+    <li class="page-item <?php if ($page == $pagetotal) {echo 'disabled';} ?> ">
+      <a class="page-link" href="?page=<?php echo $page+1; ?>">page suivante</a>
+    </li>
+  </ul>
+</nav>
+                    </div><br>
                 </div>
             </div>
-<br>
         </div>
     </div>
     <?php

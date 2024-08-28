@@ -69,12 +69,13 @@
         height: 20vh;
         width: 25vw;
         align-items: left;
+        
     }
 
     .legende {
         padding-left: 1vw;
         padding-top: 1vw;
-        float: left;
+       /*  float: left; */
     }
 
     a:link {

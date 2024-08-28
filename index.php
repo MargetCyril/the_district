@@ -2,10 +2,26 @@
 include "db.php";
 $db = connexionBase();
 
-$requete = $db->query("SELECT * FROM categorie");
+$requete = $db->query("SELECT categorie.libelle, categorie.image
+                        FROM categorie 
+                        JOIN plat ON plat.id_categorie = categorie.id
+                        JOIN commande ON commande.id_plat = plat.id
+                        GROUP BY categorie.id
+                        ORDER BY SUM(quantite) DESC
+                        LIMIT 6");
 $tableau = $requete->fetchAll(PDO::FETCH_OBJ);
 $requete->closeCursor();
 
+
+$requete = $db->query("SELECT plat.libelle, plat.image
+                        FROM plat 
+                        JOIN categorie ON plat.id_categorie = categorie.id
+                        JOIN commande ON commande.id_plat = plat.id
+                        GROUP BY plat.id
+                        ORDER BY SUM(quantite) DESC
+                        LIMIT 6");
+$tableau2 = $requete->fetchAll(PDO::FETCH_OBJ);
+$requete->closeCursor();
 ?>
 
 <!DOCTYPE html>
@@ -43,28 +59,6 @@ $requete->closeCursor();
                             </div>
 
                             <?php endforeach; ?>
-<!--
-                            <div class="col-md-6">
-                                <a href="plats_par_categorie.php" class="img-link"><img
-                                        src="images_the_district/food/Food-Name-3631.jpg" class="img-link"
-                                        alt="salade cesar"></a>
-                                <div class="cache">salade cesar</div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <a href="plats_par_categorie.php" class="img-link padtest"><img
-                                        src="images_the_district/food/buffalo-chicken.webp" class="img-link"
-                                        alt="salade cesar"></a>
-                                <div class="cache">salade cesar</div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <a href="plats_par_categorie.php" class="img-link padtest"><img
-                                        src="images_the_district/food/courgettes_farcies.jpg" class="img-link"
-                                        alt="salade cesar"></a>
-                                <div class="cache">salade cesar</div> 
-                            </div>
-                            -->
                         </div>
                     </div>
                 </div>
@@ -72,35 +66,16 @@ $requete->closeCursor();
                 <h2> Plats</h2><br>
                 <div class="container-fluid">
                     <div class="row g-3">
-
+                        <?php foreach ($tableau2 as $plat): ?>
                         <div class="col-md-6">
                             <a href="plats.php" class="img-link">
-                                <img src="images_the_district/food/cesar_salad.jpg" class="img-link"
+                                <img src="images_the_district/food/<?= $plat->image ?>" class="img-link"
                                     alt="salade cesar"></a>
-                            <div class="cache"><br>salade cesar</div>
+                            <div class="cache"><br><?= $plat->libelle?></div>
 
                         </div>
-                        <div class="col-md-6">
-                            <a href="plats.php" class="img-link">
-                                <img src="images_the_district/food/Food-Name-3631.jpg" class="img-link"
-                                    alt="salade cesar"></a>
-                            <div class="cache"><br>salade cesar</div>
-
-                        </div>
-                        <div class="col-md-6">
-                            <a href="plats.php" class="img-link">
-                                <img src="images_the_district/food/buffalo-chicken.webp" class="img-link"
-                                    alt="salade cesar"></a>
-                            <div class="cache"><br>salade cesar</div>
-
-                        </div>
-                        <div class="col-md-6">
-                            <a href="plats.php" class="img-link">
-                                <img src="images_the_district/food/courgettes_farcies.jpg" class="img-link"
-                                    alt="salade cesar"></a>
-                            <div class="cache"><br>salade cesar</div>
-
-                        </div>
+                        <?php endforeach;?>
+                      
                     </div>
                 </div>
             </div>
