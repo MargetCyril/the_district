@@ -40,7 +40,7 @@
     .presentation {
         text-align: center;
     }
- 
+
     .img-link {
         height: 20vh;
         width: 80vw;
@@ -66,16 +66,15 @@
     }
 
     .img-plat {
-        height: 20vh;
-        width: 25vw;
-        align-items: left;
-        
+        max-height: auto;
+        width: 15vw;
     }
 
     .legende {
-        padding-left: 1vw;
-        padding-top: 1vw;
-       /*  float: left; */
+        margin-left: auto;
+        margin-right: auto;
+        padding: 1vw;
+
     }
 
     a:link {

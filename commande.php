@@ -1,3 +1,23 @@
+<?php
+include "db.php";
+$db = connexionBase();
+
+function test_input($data)
+{
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
+$plat = (test_input($_GET['plat']));
+$requete = $db->query("SELECT * 
+                        FROM plat 
+                        WHERE id = $plat");
+$tableau = $requete->fetchAll(PDO::FETCH_OBJ);
+$requete->closeCursor();
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -19,13 +39,19 @@
 
         <div class="corps">
             <h1 class="ms-5">Votre commande:</h1>
+            <?php foreach ($tableau as $plat): ?>
             <div class="plats">
-                <img src="images_the_district/food/cesar_salad.jpg" class="img-plat" alt="salade cesar">
-                <p class="legende autoscroll">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor,
-                    dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam.
-                </p>
-            </div>
+                            <img src="images_the_district/food/<?= $plat->image ?>" class="img-plat" alt="salade cesar">
+
+                            <p class="legende autoscroll">
+                                <?= $plat->libelle ?>
+                                <br>
+                                <?= $plat->description ?>
+                                <br>
+                                <?= $plat->prix ?>€
+                            </p>
+                            <?php endforeach ?>
+                        </div>
 <br>
             <div class="form-group mx-5">
                 <form method="post" action="" onsubmit="return checkform2(this)" id="formulaire_contact" class="row g-3">

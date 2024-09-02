@@ -30,7 +30,7 @@
                 <div class="search">
                     <?php
                     if ($titre == "Acceuil") {
-                    echo '<form method="post" action="">';
+                    echo '<form method="post" action="search.php">';
                     echo    '<label for="recherche"></label>';
                     echo    '<input type="text" name="recherche" id="recherche" placeholder="recherche...">';
                     echo '</form>';

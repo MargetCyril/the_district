@@ -2,7 +2,8 @@
 include "db.php";
 $db = connexionBase();
 
-function test_input($data) {
+function test_input($data)
+{
     $data = trim($data);
     $data = stripslashes($data);
     $data = htmlspecialchars($data);
@@ -11,7 +12,7 @@ function test_input($data) {
 
 $page = (!empty(test_input($_GET['page'])) ? test_input($_GET['page']) : 1);
 $limit = 6;
-$debut = ($page - 1)*$limit;
+$debut = ($page - 1) * $limit;
 $requete = $db->query("SELECT * FROM categorie WHERE active = 'Yes' LIMIT $limit OFFSET $debut ");
 $tableau = $requete->fetchAll(PDO::FETCH_OBJ);
 $requete->closeCursor();
@@ -43,41 +44,41 @@ $requete->closeCursor();
 
         <div class="corps"><br>
             <div class="presentation">
-                <div class="d-none d-md-block">
-                    <h2> Catégories</h2>
-                    <div class="container-fluid">
-                        <div class="row g-3">
+                <h2> Catégories</h2>
+                <div class="row g-3">
 
-                            <?php foreach ($tableau as $categorie): ?>
-                            <div class="col-md-6">
-                                <a href="plats_par_categorie.php" class="img-link">
-                                    <img src="images_the_district/category/<?= $categorie->image ?>" class="img-link"
-                                        alt="<?=$categorie->libelle?>"></a>
-                                <div class="cache"><?=$categorie->libelle?></div>
-                            </div>
-                            <?php endforeach; ?><br>
-                            
-                            </div>
+                    <?php foreach ($tableau as $categorie): ?>
+                        <div class="col-md-6">
+                        <a href="plats_par_categorie.php?categorie=<?=$categorie->id; ?>">
+                                <img src="images_the_district/category/<?= $categorie->image ?>" class="img-link"
+                                    alt="<?= $categorie->libelle ?>"></a>
+                            <div class="cache"><?= $categorie->libelle ?></div>
                         </div>
-<br>
-                        <nav aria-label="Page navigation example">
-  <ul class="pagination justify-content-center">
-    <li class="page-item  <?php if ($page == 1) {echo 'disabled';} ?> ">
-      <a class="page-link" href="?page=<?php echo $page-1; ?>">page precedente</a>
-    </li>
-    <li class="page-item <?php if ($page == $pagetotal) {echo 'disabled';} ?> ">
-      <a class="page-link" href="?page=<?php echo $page+1; ?>">page suivante</a>
-    </li>
-  </ul>
-</nav>
-                    </div><br>
+                    <?php endforeach; ?><br>
+
                 </div>
+                <br>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item  <?php if ($page == 1) {
+                                                    echo 'disabled';
+                                                } ?> ">
+                            <a class="page-link" href="?page=<?php echo $page - 1; ?>">page precedente</a>
+                        </li>
+                        <li class="page-item <?php if ($page == $pagetotal) {
+                                                    echo 'disabled';
+                                                } ?> ">
+                            <a class="page-link" href="?page=<?php echo $page + 1; ?>">page suivante</a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
+            <br>
         </div>
     </div>
     <?php
-        include("footer.php");
-        ?>
+    include("footer.php");
+    ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
