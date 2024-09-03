@@ -11,10 +11,15 @@ function test_input($data)
 }
 
 $search = test_input($_POST['recherche']);
-$requete = $db->query("SELECT *
-                        FROM categorie 
-                        JOIN plat ON plat.id_categorie = categorie.id
-                        WHERE categorie.libelle OR plat.libelle OR plat.description LIKE '%$search%'  ");
+$requete = $db->query("SELECT id, libelle, image, active 
+	FROM categorie 
+   WHERE categorie.libelle LIKE '%$search%' 
+   AND categorie.active = 'Yes'
+    UNION 
+    SELECT id, libelle, image, id_categorie
+	FROM plat
+   WHERE plat.libelle LIKE '%$search%' 
+    OR plat.description LIKE '%$search%'");
 $tableau = $requete->fetchAll(PDO::FETCH_OBJ);
 $requete->closeCursor();
 ?>
@@ -41,21 +46,30 @@ $requete->closeCursor();
         <div class="corps"><br>
             <div class="presentation">
                 <div class="d-none d-md-block">
-                    <h2>Nos Catégories</h2>
+                    <h2>Résultats de votre recherche</h2>
                     <div class="container-fluid">
                         <div class="row g-3">
 
-                            <?php foreach ($tableau as $categorie): ?>
+                            <?php foreach ($tableau as $categorie):
+                                if ($categorie->active =='Yes'): ?>
                                 
                                 <div class="col-md-6">
                                     <a href="plats_par_categorie.php?categorie=<?= $categorie->id; ?>" class="img-link">
                                         <img src="images_the_district/category/<?= $categorie->image ?>" class="img-link"
                                             alt="salade cesar"></a>
+                                    <div><?="catégorie ".$categorie->libelle ?></div>
+                                </div>
+                                <?php else : ?>
+                                    <div class="col-md-6">
+                                    <a href="plats_par_categorie.php?plat=<?= $categorie->id; ?>" class="img-link">
+                                        <img src="images_the_district/food/<?= $categorie->image ?>" class="img-link"
+                                            alt="salade cesar"></a>
                                     <div><?= $categorie->libelle ?></div>
                                 </div>
 
                         </div>
-                    <?php endforeach; ?>
+                    <?php endif;
+                 endforeach; ?>
 
                     </div>
                 </div>

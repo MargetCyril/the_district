@@ -51,7 +51,7 @@ $requete->closeCursor();
         <div class="corps">
 
             <div class="presentation"><br>
-                <h2> Tout nos plats</h2>
+               <!-- <h2> Tout nos plats</h2> -->
 
                 <?php foreach ($tableau as $plat): ?>
 

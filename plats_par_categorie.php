@@ -14,9 +14,10 @@ $page = (!empty(test_input($_GET['page'])) ? test_input($_GET['page']) : 1);
 $category = (test_input($_GET['categorie']));
 $limit = 6;
 $debut = ($page - 1) * $limit;
-$requete = $db->query("SELECT * 
+$requete = $db->query("SELECT plat.id, plat.libelle, plat.image, plat.description, plat.prix, categorie.libelle AS cat
                         FROM plat 
-                        WHERE active = 'Yes' AND id_categorie = $category
+                        JOIN categorie ON plat.id_categorie = categorie.id
+                        WHERE plat.active = 'Yes' AND id_categorie = $category
                         LIMIT $limit 
                         OFFSET $debut ");
 $tableau = $requete->fetchAll(PDO::FETCH_OBJ);
@@ -44,7 +45,9 @@ $requete->closeCursor();
 <body>
     <div class="container-fluid">
         <?php
-        $titre = "Plats par Catégorie";
+        foreach ($tableau as $titre):
+        $titre = "Catégorie $titre->cat";
+        endforeach;
         include("header.php");
         ?>
 
@@ -52,7 +55,7 @@ $requete->closeCursor();
             <br>
             <div class="presentation">
                 <div class="d-block">
-                    <h2> Tout nos trucs de ce machin</h2><br>
+                    <!-- <h2> Tout nos trucs <?= $titre ?> de ce machin</h2><br> -->
 
 
                     <?php foreach ($tableau as $plat): ?>

@@ -44,7 +44,7 @@ $requete->closeCursor();
 
         <div class="corps"><br>
             <div class="presentation">
-                <h2> Catégories</h2>
+               <!-- <h2> Catégories</h2> -->
                 <div class="row g-3">
 
                     <?php foreach ($tableau as $categorie): ?>
