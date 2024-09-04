@@ -1,6 +1,5 @@
 <?php
-include "db.php";
-$db = connexionBase();
+include "DAO.php";
 
 function test_input($data)
 {
@@ -10,11 +9,9 @@ function test_input($data)
     return $data;
 }
 $plat = (test_input($_GET['plat']));
-$requete = $db->query("SELECT * 
-                        FROM plat 
-                        WHERE id = $plat");
-$tableau = $requete->fetchAll(PDO::FETCH_OBJ);
-$requete->closeCursor();
+
+$da0 = new DAO("plat", NULL, NULL);
+$tableau=$da0->get_plat($plat);
 
 ?>
 

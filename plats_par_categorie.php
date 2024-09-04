@@ -14,7 +14,11 @@ $page = (!empty(test_input($_GET['page'])) ? test_input($_GET['page']) : 1);
 $category = (test_input($_GET['categorie']));
 $limit = 6;
 $debut = ($page - 1) * $limit;
-$requete = $db->query("SELECT plat.id, plat.libelle, plat.image, plat.description, plat.prix, categorie.libelle AS cat
+
+$da0= new DAO("plat", "categorie", NULL);
+$tableau = $dao->get_platcat($category, $limit, $debut);
+/*
+$requete = $db->query("SELECT plat.*, categorie.libelle AS cat
                         FROM plat 
                         JOIN categorie ON plat.id_categorie = categorie.id
                         WHERE plat.active = 'Yes' AND id_categorie = $category
@@ -22,6 +26,7 @@ $requete = $db->query("SELECT plat.id, plat.libelle, plat.image, plat.descriptio
                         OFFSET $debut ");
 $tableau = $requete->fetchAll(PDO::FETCH_OBJ);
 $requete->closeCursor();
+*/
 $requete = $db->query("SELECT count(id)FROM plat 
                         WHERE active = 'Yes' AND id_categorie = $category");
 $elementtotal = $requete->fetchColumn();

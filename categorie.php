@@ -1,6 +1,5 @@
 <?php
-include "db.php";
-$db = connexionBase();
+include "DAO.php";
 
 function test_input($data)
 {
@@ -13,13 +12,10 @@ function test_input($data)
 $page = (!empty(test_input($_GET['page'])) ? test_input($_GET['page']) : 1);
 $limit = 6;
 $debut = ($page - 1) * $limit;
-$requete = $db->query("SELECT * FROM categorie WHERE active = 'Yes' LIMIT $limit OFFSET $debut ");
-$tableau = $requete->fetchAll(PDO::FETCH_OBJ);
-$requete->closeCursor();
-$requete = $db->query("SELECT count(id)FROM categorie WHERE active = 'Yes' ");
-$elementtotal = $requete->fetchColumn();
-$pagetotal = ceil($elementtotal / $limit);
-$requete->closeCursor();
+
+$da0 = new DAO("categorie", NULL, NULL);
+$tableau=$da0->get_limited( $limit, $debut);
+$pagetotal=$da0->get_total( $limit, $debut);
 
 ?>
 

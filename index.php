@@ -1,27 +1,13 @@
 <?php
-include "db.php";
-$db = connexionBase();
+include "DAO.php";
 
-$requete = $db->query("SELECT categorie.libelle, categorie.image, categorie.id
-                        FROM categorie 
-                        JOIN plat ON plat.id_categorie = categorie.id
-                        JOIN commande ON commande.id_plat = plat.id
-                        GROUP BY categorie.id
-                        ORDER BY SUM(quantite) DESC
-                        LIMIT 6");
-$tableau = $requete->fetchAll(PDO::FETCH_OBJ);
-$requete->closeCursor();
+$da0= new DAO("categorie","plat","commande");
+$tableau=$da0->get_index("6");
+
+$da1= new DAO("plat","categorie","commande");
+$tableau2=$da1->get_index2("6");
 
 
-$requete = $db->query("SELECT plat.libelle, plat.image, plat.id
-                        FROM plat 
-                        JOIN categorie ON plat.id_categorie = categorie.id
-                        JOIN commande ON commande.id_plat = plat.id
-                        GROUP BY plat.id
-                        ORDER BY SUM(quantite) DESC
-                        LIMIT 6");
-$tableau2 = $requete->fetchAll(PDO::FETCH_OBJ);
-$requete->closeCursor();
 ?>
 
 <!DOCTYPE html>
