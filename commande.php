@@ -38,14 +38,14 @@ $tableau=$da0->get_plat($plat);
             <h1 class="ms-5">Votre commande:</h1>
             <?php foreach ($tableau as $plat): ?>
             <div class="plats">
-                            <img src="images_the_district/food/<?= $plat->image ?>" class="img-plat" alt="salade cesar">
+                            <img src="images_the_district/food/<?= $plat->image; ?>" class="img-plat" alt="salade cesar">
 
                             <p class="legende autoscroll">
-                                <?= $plat->libelle ?>
+                                <?= $plat->libelle; ?>
                                 <br>
-                                <?= $plat->description ?>
+                                <?= $plat->description; ?>
                                 <br>
-                                <?= $plat->prix ?>€
+                                <?= $plat->prix; ?>€
                             </p>
                             <?php endforeach ?>
                         </div>

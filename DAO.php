@@ -79,22 +79,26 @@ class DAO
 
     public function get_platcat($category, $limit, $debut)
     {
-        $db = connexionBase();/*
+        $db = connexionBase();
         $requete = $db->query("SELECT $this->_table.*,  $this->_table2.libelle AS cat
                         FROM $this->_table 
                         JOIN $this->_table2 ON $this->_table.id_$this->_table2 = $this->_table2.id
                         WHERE $this->_table.active = 'Yes' AND id_$this->_table2 = $category
                         LIMIT $limit 
                         OFFSET $debut ");
-                        */
-                        $requete = $db->query("SELECT plat.*, categorie.libelle AS cat
-                        FROM plat 
-                        JOIN categorie ON plat.id_categorie = categorie.id
-                        WHERE plat.active = 'Yes' AND id_categorie = $category
-                        LIMIT $limit 
-                        OFFSET $debut ");
         $tableau = $requete->fetchAll(PDO::FETCH_OBJ);
         return $tableau;
         $requete->closeCursor();
+    }
+
+    public function get_totalcat($category, $limit)
+    {
+        $db = connexionBase();
+        $requete = $db->query("SELECT count(id)FROM $this->_table; 
+                        WHERE active = 'Yes' AND id_categorie = $category");
+$elementtotal = $requete->fetchColumn();
+$pagetotal = ceil($elementtotal / $limit);
+return $pagetotal;
+$requete->closeCursor();
     }
 }

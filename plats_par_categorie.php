@@ -1,6 +1,5 @@
 <?php
-include "db.php";
-$db = connexionBase();
+include "DAO.php";
 
 function test_input($data)
 {
@@ -16,22 +15,10 @@ $limit = 6;
 $debut = ($page - 1) * $limit;
 
 $da0= new DAO("plat", "categorie", NULL);
-$tableau = $dao->get_platcat($category, $limit, $debut);
-/*
-$requete = $db->query("SELECT plat.*, categorie.libelle AS cat
-                        FROM plat 
-                        JOIN categorie ON plat.id_categorie = categorie.id
-                        WHERE plat.active = 'Yes' AND id_categorie = $category
-                        LIMIT $limit 
-                        OFFSET $debut ");
-$tableau = $requete->fetchAll(PDO::FETCH_OBJ);
-$requete->closeCursor();
-*/
-$requete = $db->query("SELECT count(id)FROM plat 
-                        WHERE active = 'Yes' AND id_categorie = $category");
-$elementtotal = $requete->fetchColumn();
-$pagetotal = ceil($elementtotal / $limit);
-$requete->closeCursor();
+$tableau = $da0->get_platcat($category, $limit, $debut);
+
+$da1= new DAO("plat", NULL, NULL);
+$pagetotal = $da1->get_totalcat($category, $limit);
 
 ?>
 
@@ -101,47 +88,6 @@ $requete->closeCursor();
                             } ?>
                         </ul>
                     </nav>
-                    <!--
-                    <a href="commande.php">
-                        <div class="plats">
-                            <img src="images_the_district/food/cesar_salad.jpg" class="img-plat" alt="salade cesar">
-                            <p class="legende autoscroll">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor,
-                                dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam.
-                            </p>
-
-                        </div>
-                    </a>
-                    <br>
-                    <a href="commande.php">
-                        <div class="plats">
-                            <img src="images_the_district/food/cesar_salad.jpg" class="img-plat" alt="salade cesar">
-                            <p class="legende autoscroll">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor,
-                                dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam.
-                            </p>
-                        </div>
-                    </a>
-                    <br>
-                    <a href="commande.php">
-                        <div class="plats">
-                            <img src="images_the_district/food/cesar_salad.jpg" class="img-plat" alt="salade cesar">
-                            <p class="legende autoscroll">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor,
-                                dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam.
-                            </p>
-                        </div>
-                    </a>
-                    <br>
-                    <a href="commande.php">
-                        <div class="plats">
-                            <img src="images_the_district/food/cesar_salad.jpg" class="img-plat" alt="salade cesar">
-                            <p class="legende autoscroll">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor,
-                                dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam.
-                            </p>
-                        </div>
-                    </a> -->
                     <br>
                 </div>
             </div>

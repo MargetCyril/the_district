@@ -13,13 +13,13 @@ function test_input($data)
 $search = test_input($_POST['recherche']);
 $requete = $db->query("SELECT id, libelle, image, active 
 	FROM categorie 
-   WHERE categorie.libelle LIKE '%$search%' 
+    WHERE categorie.libelle LIKE '%$search%'
    AND categorie.active = 'Yes'
     UNION 
     SELECT id, libelle, image, id_categorie
 	FROM plat
-   WHERE plat.libelle LIKE '%$search%' 
-    OR plat.description LIKE '%$search%'");
+    WHERE plat.libelle  LIKE '%$search%' 
+     OR plat.description LIKE '%$search%' ");
 $tableau = $requete->fetchAll(PDO::FETCH_OBJ);
 $requete->closeCursor();
 ?>
@@ -61,7 +61,7 @@ $requete->closeCursor();
                                 </div>
                                 <?php else : ?>
                                     <div class="col-md-6">
-                                    <a href="plats_par_categorie.php?plat=<?= $categorie->id; ?>" class="img-link">
+                                    <a href="commande.php?plat=<?= $categorie->id; ?>" class="img-link">
                                         <img src="images_the_district/food/<?= $categorie->image ?>" class="img-link"
                                             alt="salade cesar"></a>
                                     <div><?= $categorie->libelle ?></div>
