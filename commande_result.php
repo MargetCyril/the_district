@@ -9,6 +9,7 @@ function test_input($data)
 date_default_timezone_set('Europe/Paris');
 $nom = $telephone = $email = $adresse = $quantite = "";
 
+$libelle = test_input($_POST["libelle"]);
 $id_plat = test_input($_POST["id_plat"]);
 $quantite = test_input($_POST["quantite"]);
 $prix = test_input($_POST["prix"]);
@@ -41,6 +42,37 @@ try {
 
     $requete->execute();
     $requete->closeCursor();
+    require_once 'mail.php';
+
+ /*    require_once 'vendor/autoload.php';
+
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\Exception;
+    
+    $mail = new PHPMailer(true);
+    $mail->isSMTP();
+    $mail->Host       = 'localhost';    
+    $mail->SMTPAuth   = false;    
+    $mail->Port       = 1025;                                   
+    $mail->setFrom('from@thedistrict.com', 'The District Company');
+    $mail->addAddress("$email_client", "$nom_client");
+    $mail->addReplyTo("reply@thedistrict.com", "Reply"); 
+    $mail->isHTML(true);
+    $mail->Subject = 'Confirmation commande';
+    $mail->Body = "Votre commande de".$quantite." ".$libelle." à bien été enregistrée";
+    
+    if ($mail){
+        try {
+            $mail->send();
+            echo 'Email envoyé avec succès';
+            } catch (Exception $e) {
+            echo "L'envoi de mail a échoué. L'erreur suivante s'est produite : ", $mail->ErrorInfo;
+            }
+        } */
+    
+    
+
+
 } catch (Exception $e) {
     var_dump($requete->queryString);
     var_dump($requete->errorInfo());

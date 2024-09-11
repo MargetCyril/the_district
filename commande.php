@@ -61,6 +61,10 @@ $tableau = $da0->get_plat($id_plat);
                             <label for="id_plat"></label>
                             <input type=number name="id_plat" id="id_plat" class="form-number" value=<?=$id_plat?> hidden >
                         </div>
+                        <div class="col-3">
+                            <label for="libelle"></label>
+                            <input type=text name="libelle" id="libelle" class="form-control" value=<?=$plat->libelle?> hidden >
+                        </div>
 
                         <div class="col-3">
                             <label for="prix"></label>

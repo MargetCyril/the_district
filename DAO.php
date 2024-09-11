@@ -17,6 +17,15 @@ class DAO
         $this->_table3 = $table3;
     }
 
+    public function get_all()
+    {
+        $db = connexionBase();
+        $requete = $db->query("SELECT * FROM $this->_table");
+        $tableau = $requete->fetchAll(PDO::FETCH_OBJ);
+        return $tableau;
+        $requete->closeCursor();
+    }
+
     public function get_limited($limit, $debut)
     {
         $db = connexionBase();
