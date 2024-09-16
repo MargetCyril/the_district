@@ -78,3 +78,14 @@ function checkform2() {
     }
 }
 
+function checkform3() {
+    let filtre1 = new RegExp(/^[a-zA-Z0-9]+$/);
+    let libelle = document.getElementById("libelle").value;
+    libelle = filtre1.test(libelle);
+    
+    if (libelle == false) {
+        document.getElementById("erreur_libelle").innerHTML = "champ incorrect"
+        return false
+    }
+}
+
