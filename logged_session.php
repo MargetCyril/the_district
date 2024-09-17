@@ -193,20 +193,40 @@ $tableau1 = $da1->get_all();
                 <form method="POST" enctype="multipart/form-data" action="script_cat_modif.php" onsubmit="return checkform3(this)" id="form_cat_modif" class="row g-3" style="display: none;">
                     <fieldset>
 
-                    <label for="categorie">Catégorie :</label><br>
-                        <select name="categorie" id="ategorie">
+                    <label for="categorie1">Catégorie :</label><br>
+                        <select name="categorie1" id="categorie1">
                             <option value=""> Choissisez la catégorie </option>
                             <?php foreach ($tableau as $categorie): ?>
                                 <option value="<?= $categorie->id ?>"><?= $categorie->libelle ?></option>
                             <?php endforeach ?>
                         </select>
                         <br><br>
-
+<p id="demo">rien</p>
                         <script>
-document.getElementById("categorie").addEventListener("select", myFunction);
+document.getElementById("categorie1").addEventListener("change", myFunction);
 
 function myFunction() {
-  document.getElementById("demo").innerHTML = "You selected some text!";
+    let cat = document.getElementById("categorie1").value;
+    const data = {id: cat};
+    fetch('process.php', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+})
+.then(response => response.json())
+.then(result => {
+    console.log('Success:');
+    console.log(result[0].id)
+
+})
+.catch(error => {
+    console.error('Error:', error);
+});
+  
+
+
 }
 </script>
 
