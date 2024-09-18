@@ -56,7 +56,7 @@ $tableau1 = $da1->get_all();
             <button onclick="showForm('form_ajout_plat')">Ajouter un plat</button>
 
             <div class="form-group mx-5">
-                <form method="POST" action="script_plat_ajout.php" enctype="multipart/form-data"  id="form_ajout_plat" class="row g-3" style="display: none;">
+                <form method="POST" action="script_plat_ajout.php" enctype="multipart/form-data" id="form_ajout_plat" class="row g-3" style="display: none;">
                     <fieldset>
                         <div class="col-3">
                             <label for="libelle">libelle:</label>
@@ -109,36 +109,92 @@ $tableau1 = $da1->get_all();
                 <form method="POST" action="script_plat_modif.php" enctype="multipart/form-data" id="form_modif_plat" class="row g-3" style="display: none;">
                     <fieldset>
 
-                    <label for="id">Plat :</label><br>
-                        <select name="id" id="id">
+                        <label for="plat1">Plat :</label><br>
+                        <select name="plat1" id="plat1">
                             <option value=""> Choissisez le plat à modifier </option>
                             <?php foreach ($tableau1 as $plat): ?>
                                 <option value="<?= $plat->id ?>"><?= $plat->libelle ?></option>
                             <?php endforeach ?>
                         </select>
 
+
+                        <script>
+                            document.getElementById("plat1").addEventListener("change", plat_menu_listener);
+
+                            function plat_menu_listener() {
+                                let plat = document.getElementById("plat1").value;
+                                const data = {
+                                    id: plat
+                                };
+                                fetch('script_plat_modif_menu.php', {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/json'
+                                        },
+                                        body: JSON.stringify(data)
+                                    })
+                                    .then(response => response.json())
+                                    .then(result => {
+                                        console.log('Success:');
+                                        console.log(result)
+                                        document.getElementById("libelle0").setAttribute("value", result[0].libelle)
+                                        document.getElementById("fileToUpload0").setAttribute("value", result[0].image)
+                                        document.getElementById("prix0").setAttribute("value", result[0].prix)
+                                        document.getElementById("description0").value = result[0].description
+
+                                        let cat = result[0].id_categorie;
+                                        const data1 = {
+                                            id: cat
+                                        };
+                                        fetch('script_plat_cat.php', {
+                                                method: 'POST',
+                                                headers: {
+                                                    'Content-Type': 'application/json'
+                                                },
+                                                body: JSON.stringify(data1)
+                                            })
+                                            .then(response => response.json())
+                                            .then(result => {
+                                                console.log('Success:');
+                                                console.log(result[0].libelle)
+
+                                                document.getElementById("categorie0").setAttribute("value", result[0].id)
+                                                document.getElementById("categorie0").innerHTML = result[0].libelle 
+
+                                            })
+                                            .catch(error => {
+                                                console.error('Error:', error);
+                                            });
+
+                                    })
+                                    .catch(error => {
+                                        console.error('Error:', error);
+                                    });
+                            }
+                        </script>
+
                         <div class="col-3">
-                            <label for="libelle">libelle:</label>
-                            <input type="text" name="libelle" id="libelle" class="form-control" value="<?= $plat->libelle ?>">
+                            <label for="libelle0">libelle:</label>
+                            <input type="text" name="libelle0" id="libelle0" class="form-control" value="<?= $plat->libelle ?>">
                         </div>
 
                         <div class="col-12">
-                            <label for="description">Description:</label> <textarea name="description" id="description" value="<?= $plat->libelle ?>"
+                            <label for="description0">Description:</label> <textarea name="description0" id="description0" value="<?= $plat->libelle ?>"
                                 class="form-control"></textarea>
                         </div>
 
                         <div class="col-3">
-                            <label for="prix">Prix:</label>
-                            <input type=number name="prix" id="prix" class="form-number" value="" required>
+                            <label for="prix0">Prix:</label>
+                            <input type=number name="prix0" id="prix0" class="form-number" value="" required>
                         </div>
 
                         <div class="col-12">
-                            <label for="fileToUpload">Image:</label><br>
-                            <input type="file" name="fileToUpload" id="fileToUpload">
+                            <label for="fileToUpload0">Image:</label><br>
+                            <input type="file" name="fileToUpload0" id="fileToUpload0">
                         </div>
 
-                        <label for="categorie">Catégorie :</label><br>
-                        <select name="categorie" id="ategorie">
+                        <label for="categorie0">Catégorie :</label><br>
+                        <select name="categorie0" id="categorie0">
                             <option value=""> Choissisez la catégorie </option>
                             <?php foreach ($tableau as $categorie): ?>
                                 <option value="<?= $categorie->id ?>"><?= $categorie->libelle ?></option>
@@ -193,7 +249,7 @@ $tableau1 = $da1->get_all();
                 <form method="POST" enctype="multipart/form-data" action="script_cat_modif.php" onsubmit="return checkform3(this)" id="form_cat_modif" class="row g-3" style="display: none;">
                     <fieldset>
 
-                    <label for="categorie1">Catégorie :</label><br>
+                        <label for="categorie1">Catégorie :</label><br>
                         <select name="categorie1" id="categorie1">
                             <option value=""> Choissisez la catégorie </option>
                             <?php foreach ($tableau as $categorie): ?>
@@ -201,43 +257,47 @@ $tableau1 = $da1->get_all();
                             <?php endforeach ?>
                         </select>
                         <br><br>
-<p id="demo">rien</p>
+
                         <script>
-document.getElementById("categorie1").addEventListener("change", myFunction);
+                            document.getElementById("categorie1").addEventListener("change", cat_menu_listener);
 
-function myFunction() {
-    let cat = document.getElementById("categorie1").value;
-    const data = {id: cat};
-    fetch('process.php', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(data)
-})
-.then(response => response.json())
-.then(result => {
-    console.log('Success:');
-    console.log(result[0].id)
+                            function cat_menu_listener() {
+                                let cat = document.getElementById("categorie1").value;
+                                const data = {
+                                    id: cat
+                                };
+                                fetch('script_cat_modif_menu.php', {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/json'
+                                        },
+                                        body: JSON.stringify(data)
+                                    })
+                                    .then(response => response.json())
+                                    .then(result => {
+                                        console.log('Success:');
+                                        console.log(result[0].id)
+                                        document.getElementById("libelle1").setAttribute("value", result[0].libelle)
+                                        document.getElementById("fileToUpload1").setAttribute("value", result[0].image)
 
-})
-.catch(error => {
-    console.error('Error:', error);
-});
-  
+                                    })
+                                    .catch(error => {
+                                        console.error('Error:', error);
+                                    });
 
 
-}
-</script>
+
+                            }
+                        </script>
 
                         <div class="col-3">
-                            <label for="libelle">libelle:</label>
-                            <input type="text" name="libelle" id="libelle" class="form-control" value="">
+                            <label for="libelle1">libelle:</label>
+                            <input type="text" name="libelle1" id="libelle1" class="form-control" value="">
                         </div>
 
                         <div class="col-12">
-                            <label for="fileToUpload">Image:</label><br>
-                            <input type="file" name="fileToUpload" id="fileToUpload">
+                            <label for="fileToUpload1">Image:</label><br>
+                            <input type="file" name="fileToUpload1" id="fileToUpload1" value="">
                         </div>
 
                         <label for="active">Active :</label><br>
@@ -254,8 +314,8 @@ function myFunction() {
                     </fieldset>
                 </form>
             </div>
-<br>
-            
+            <br>
+
 
         </div>
 
